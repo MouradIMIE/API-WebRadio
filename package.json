@@ -1,0 +1,38 @@
+{
+  "name": "web-radio",
+  "version": "1.0.0",
+  "description": "API for our final project of M1 EEDSI",
+  "main": "index.ts",
+  "scripts": {
+    "start": "pm2 kill && pm2 start index.ts --watch && pm2 logs",
+    "test": "jest --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MouradIMIE/API-WebRadio.git"
+  },
+  "author": "BOUKHALFI Mourad",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.26",
+    "nodemailer": "^6.4.11",
+    "pm2": "^4.5.0",
+    "uuid": "^8.3.0",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "jest": "^26.2.2",
+    "supertest": "^4.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/MouradIMIE/API-WebRadio/issues"
+  },
+  "homepage": "https://github.com/MouradIMIE/API-WebRadio#readme"
+}
