@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -66,13 +66,13 @@ function genCodeDate() {
     };
 }
 
-function between(min, max) {
+function between(min: any, max: any) {
     return Math.floor(
         Math.random() * (max - min + 1) + min
     )
 }
 
-customerSchema.pre('save', async function (next) {
+customerSchema.pre('save', async function (next: any) {
     // Hash the password before saving the user model
     const user = this;
     if (user.isModified('password')) {
