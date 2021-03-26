@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.26",
     "nodemailer": "^6.4.11",
+    "nodemon": "^2.0.7",
     "pm2": "^4.5.0",
     "uuid": "^8.3.0",
     "validator": "^13.1.17"
