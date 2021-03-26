@@ -10,6 +10,6 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server run to http://localhost:${process.env.PORT}`);
+app.listen(3000, () => {
+    console.log(`Server run to http://localhost:${3000}`);
 })
