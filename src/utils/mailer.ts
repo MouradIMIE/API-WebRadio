@@ -26,6 +26,6 @@
 //             // console.log(mailOptions)
 //         }
 //     });
-// }
+//  }
 
 // module.exports = sendEmail;
