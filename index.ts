@@ -9,7 +9,9 @@ const app = express();
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.get('/test', (req,res) => {
+    res.send('hello world');
+})
 app.listen(3000, () => {
     console.log(`Server run to http://localhost:3000`);
 })
