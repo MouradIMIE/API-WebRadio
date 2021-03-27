@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/test', (req,res) => {
     res.send('hello world');
 })
+
 app.listen(process.env.PORT || 80, () => {
     console.log(`Server run to http://localhost:3000`);
 })
