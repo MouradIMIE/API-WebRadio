@@ -1,4 +1,4 @@
-import mongoose from 'mongoose' 
+import mongoose from "mongoose"; 
 import { config } from "dotenv";
 config();//process.env
 
@@ -15,6 +15,6 @@ mongoose.connection.on('connected', (err: any) => {
   } else {
     console.log('MongoDB cloud is running...');
   }
-})
+});
 
 module.exports = mongoose;
