@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 
-config(); //process.env
+config(); //process.env 
 const app = express();
 
 app.use(cors())
