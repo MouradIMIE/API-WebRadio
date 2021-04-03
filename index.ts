@@ -8,6 +8,7 @@ import cors from "cors";
 config(); //process.env
 const PORT  = process.env.PORT || 80;
 const app = express();
+
 //Connexion à la base de données
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@clusterwebradio.fb0mk.mongodb.net/WebradioData?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
@@ -23,8 +24,6 @@ mongoose.connection.on('connected', (err: any) => {
     console.log('MongoDB cloud is running...');
   }
 });
-
-
 
 //Chargement du dossier public
 const www = process.env.WWW || "./public";
