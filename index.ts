@@ -1,13 +1,30 @@
 import bodyParser from "body-parser";
 import { config } from "dotenv";
+import mongoose from "mongoose"; 
 import express from "express";
 import cors from "cors";
 
 
 config(); //process.env
+const PORT  = process.env.PORT || 80;
 const app = express();
-//avoir accès à la connexion de la BD à travers la variable globale
-global = require("./src/db/dbConnect");
+//Connexion à la base de données
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@clusterwebradio.fb0mk.mongodb.net/WebradioData?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+});
+// Connexion à la base de donnée sur mongoCloud
+mongoose.connection.on('connected', (err: any) => {
+  if (err) {
+    if(err) throw err;
+  } else {
+    console.log('MongoDB cloud is running...');
+  }
+});
+
+
 
 //Chargement du dossier public
 const www = process.env.WWW || "./public";
@@ -26,6 +43,6 @@ app.use((req:any, res:any, next:any) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     next();
 });
-app.listen(process.env.PORT || 80, () => {
-    console.log(`Server run to http://localhost:${process.env.PORT }`);
+app.listen(PORT, () => {
+    console.log(`Server run to http://localhost:${PORT}`);
 })
