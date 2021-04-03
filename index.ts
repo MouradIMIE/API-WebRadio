@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import mongoose from "mongoose"; 
 import express from "express";
 import cors from "cors";
-
+import Routes from "./src/routes/routes";
 
 config(); //process.env
 const PORT  = process.env.PORT || 80;
@@ -31,10 +31,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(www));
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// a virer dans le router dans le futur
 //Route par défaut
-app.get('*', (req: any,res:any) => {
-    res.sendFile(`index.html`, { root: www });
-})
+// app.get('*', (req: any,res:any) => {
+//     res.sendFile(`index.html`, { root: www });
+// })
 
 app.use((req:any, res:any, next:any) => {
     res.header("Access-Control-Allow-Headers", "*");
@@ -42,6 +44,10 @@ app.use((req:any, res:any, next:any) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     next();
 });
+
+// router 
+app.use('/', Routes);
+
 app.listen(PORT, () => {
     console.log(`Server run to http://localhost:${PORT}`);
 })
