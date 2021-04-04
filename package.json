@@ -8,6 +8,7 @@
     "start": "nodemon index.ts",
     "server": "nodemon index.ts",
     "test": "jest --forceExit",
+    "authTest": "newman run ./test/Auth.postman_collection.json -e ./test/url.postman_environment.json",
     "debug": "nodemon --watch src ./index.ts --exec ts-node ./index.ts"
   },
   "repository": "git+https://github.com/MouradIMIE/API-WebRadio.git",
