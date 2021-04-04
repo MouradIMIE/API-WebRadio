@@ -7,15 +7,14 @@ const existingEmail = async (existingEmail: string): Promise<boolean> => {
   return exist ? true : false;
 };
 
-function generateAdminPassword () : string {
-  var password = generator.generate({
+function generateAdminPassword(): string {
+  return generator.generate({
     length: 8,
     numbers: true,
     symbols: true,
-    strict:true,
+    strict: true,
   });
-  return password;
-};
+}
 
 const adminUtils = {
   existingEmail,

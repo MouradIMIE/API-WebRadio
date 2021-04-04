@@ -13,7 +13,7 @@ export class AdminController {
 
       //Génération aléatoire d'un mot de passe qui sera stocké dans la base de donnée et envoyer et
       //par mail en cas de succès d'inscription à l'utilisateur
-      const password = adminUtils.generateAdminPassword();
+      const password: string = adminUtils.generateAdminPassword();
 
       // Vérification de si toutes les données existent
       if (!firstname || !lastname || !email || !createdBy)
@@ -28,7 +28,7 @@ export class AdminController {
         throw new Error("Cet email existe déjà");
 
       //Hash le password avant de le send en base de donnée
-      const passwordEncrypted = await hashPassword(password);
+      const passwordEncrypted: string = await hashPassword(password);
 
       //Création de l'admin
       const admin: adminInterface = await Admin.create({
@@ -36,7 +36,7 @@ export class AdminController {
         lastname: lastname,
         email: email,
         password: passwordEncrypted,
-        createdBy: createdBy,
+        createdBy: createdBy
       });
 
       //Envoie de la response
@@ -47,29 +47,28 @@ export class AdminController {
           id: admin._id,
           firstname: admin.firstname,
           lastname: admin.lastname,
-          email: admin.email,
+          email: admin.email
         },
       });
       //Envoie du mot de passe au nouvel admin
       sendMail(admin.email, "Password WebRadio", password);
-
     } catch (error) {
       if (error.message === "Le format de l'email n'est pas valide") {
         res.status(400).send({
           error: true,
-          message: "Le format de l'email n'est pas valide",
+          message: "Le format de l'email n'est pas valide"
         });
       }
       if (error.message === "Des données sont manquantes") {
         res.status(400).send({
           error: true,
-          message: "Des données sont manquantes",
+          message: "Des données sont manquantes"
         });
       }
       if (error.message === "Cet email existe déjà") {
         res.status(400).send({
           error: true,
-          message: "Cet email existe déjà",
+          message: "Cet email existe déjà"
         });
       }
     }
