@@ -147,7 +147,7 @@ export class AuthController {
         sendMail(body.email,"Reset Password", adminUtils.generateAdminPassword())
         res.status(200).send({
           error: false,
-          message: "Lien envoyé avec succès.",
+          message: "Mot de passe envoyé avec succès.",
         });
         return;
       }
