@@ -121,13 +121,11 @@ export class AuthController {
   static forgotPassword = async (req: Request, res: Response) => {
       const body: adminInterface = req.body;
 
-      //Verification qu'on recois bien un email
       if(!body.email) {
         res = AuthException.getAuthResponse("Des données sont manquantes", res);
         return;
       }
       
-      //Vérification de si l'email est au bon format
       if (!validEmail(body.email)) {
         res = AuthException.getAuthResponse("Le format de l'email n'est pas valide", res);
         return;
