@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AdminController } from '../controllers/AdminController';
+import { AuthController } from '../controllers/adminControllers/authController/AuthController';
 
 
 const AdminRoutes = Router();
@@ -8,6 +8,7 @@ AdminRoutes.get('/test', (req, res) => {
     
 })
 
-AdminRoutes.post('/register',AdminController.register);
-AdminRoutes.post('/login',AdminController.login);
+AdminRoutes.post('/register', AuthController.register);
+AdminRoutes.post('/login', AuthController.login);
+AdminRoutes.get('/forgot-password', AuthController.forgotPassword);
 export default AdminRoutes;

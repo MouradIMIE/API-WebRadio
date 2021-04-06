@@ -26,11 +26,11 @@ const sendMail = async (
       from: "WebRadio RadioWorld - BOUKHALFI Mourad <" + accountMail + ">",
       to: email,
       subject: mailSubject,
-      text: "Your password is" + password,
+      text: "Your password is: " +  password
     });
   } catch (err) {
     console.log(err);
   }
 };
 
-export default sendMail;
+export { sendMail };
