@@ -23,14 +23,14 @@ const sendMail = async (
     });
 
     await transporter.sendMail({
-      from: "WebRadio RadioWorld - BOUKHALFI Mourad <" + accountMail + ">",
+      from: "WebRadio RadioWorld - Team <" + accountMail + ">",
       to: email,
       subject: mailSubject,
-      text: "Your password is" + password,
+      text: "Your password is: " +  password
     });
   } catch (err) {
     console.log(err);
   }
 };
 
-export default sendMail;
+export { sendMail };

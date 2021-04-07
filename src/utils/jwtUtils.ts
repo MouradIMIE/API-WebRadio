@@ -6,9 +6,7 @@ import { config } from "dotenv";
 config();
 const JWT_KEY: string = process.env.JWT_KEY as string;
 
-const generateAdminToken = async (
-  admin: adminInterface
-): Promise<adminInterface> => {
+const generateAdminToken = async (admin: adminInterface): Promise<adminInterface> => {
   admin.token = jsonwebtoken.sign(
     { _id: admin._id, email: admin.email },
     JWT_KEY,
