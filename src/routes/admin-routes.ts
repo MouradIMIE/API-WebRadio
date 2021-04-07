@@ -13,4 +13,5 @@ AdminRoutes.post('/register', AuthController.register);
 AdminRoutes.post('/login', AuthController.login);
 AdminRoutes.get('/forgot-password', AuthController.forgotPassword);
 AdminRoutes.delete('/logout',[authMiddleware],AuthController.disconnect)
+AdminRoutes.delete('/delete',[authMiddleware],AuthController.delete)
 export default AdminRoutes;

@@ -172,7 +172,20 @@ export class AuthController {
       message: "L'utilisateur a été déconnecté avec succès",
     });
     return;
-    
   }
 
+// --------------------------------------------------Delete-------------------------------------------------//
+  static delete = async (req: Request, res: Response) => {
+
+    // Récupération de l'admin grâce au Authmiddleware qui rajoute le token dans req
+    const request: any = req;
+    const admin: adminInterface = request.admin;
+
+    await Admin.deleteOne({_id:admin._id});
+    res.status(200).send({
+      error: false,
+      message: "Vous venez de supprimer votre compte",
+    });
+    return;
+  }
 }

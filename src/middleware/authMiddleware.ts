@@ -19,7 +19,7 @@ middleware.use(async (req: Request, res: Response, next: NextFunction) => {
         
         //Vérification du token et des informations contenues
         const data:any = jsonwebtoken.verify(token,JWT_KEY);
-        console.log(data.admin);
+        
         if(!data || !data.email || !data._id) throw new Error('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
 
         //Récupération de l'admin pour le mettre dans le req
