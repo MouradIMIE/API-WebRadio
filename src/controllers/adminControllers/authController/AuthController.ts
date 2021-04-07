@@ -172,7 +172,7 @@ export class AuthController {
       message: "L'utilisateur a été déconnecté avec succès",
     });
     return;
-
+    
   }
 
 }

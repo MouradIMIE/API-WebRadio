@@ -14,20 +14,19 @@ middleware.use(async (req: Request, res: Response, next: NextFunction) => {
     try{
         
         //Récupération du token
-        const token = req.header('Authorization')?.replace('Bearer','') as string;
+        const token = req.header('Authorization')?.replace('Bearer','').trim() as string;
         if(!token) throw new Error ('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
         
         //Vérification du token et des informations contenues
         const data:any = jsonwebtoken.verify(token,JWT_KEY);
         console.log(data.admin);
         if(!data || !data.email || !data._id) throw new Error('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
-        console.log('3');
+
         //Récupération de l'admin pour le mettre dans le req
         const admin : adminInterface | undefined = await Admin.findOne({email:data.email});
         if(!admin) throw new Error('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
-        console.log('4');
         Object.assign(req,{admin});
-        console.log('5');
+        
         //Si tout vas bien on passe au controller
         next();
 
