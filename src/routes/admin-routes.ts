@@ -10,5 +10,5 @@ AdminRoutes.get('/test', (req, res) => {
 
 AdminRoutes.post('/register', AuthController.register);
 AdminRoutes.post('/login', AuthController.login);
-AdminRoutes.get('/forgot-password', AuthController.forgotPassword);
+AdminRoutes.post('/forgot-password', AuthController.forgotPassword);
 export default AdminRoutes;
