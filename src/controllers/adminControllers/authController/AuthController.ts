@@ -143,8 +143,12 @@ export class AuthController {
       admin = await jwtUtils.generateAdminRefreshToken(admin);
 
       if(admin.token) {
+        const password: string = adminUtils.generateAdminPassword();
+        const passwordEncrypted: string = await hashPassword(password);
+        admin.password = passwordEncrypted;
+        await Admin.updateOne({_id : admin._id},admin);
+        sendMail(body.email,"Reset Password", password);
 
-        sendMail(body.email,"Reset Password", adminUtils.generateAdminPassword())
         res.status(200).send({
           error: false,
           message: "Mot de passe envoyé avec succès.",
