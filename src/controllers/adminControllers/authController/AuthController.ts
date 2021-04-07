@@ -105,7 +105,7 @@ export class AuthController {
 
       res.status(200).send({
         error: false,
-        message: "L'admin a été ajouté avec succès",
+        message: "Connexion réussie",
         admin: {
           id: admin._id,
           firstname: admin.firstname,
@@ -117,7 +117,7 @@ export class AuthController {
       });
   };
 
- // --------------------------------------------------ForogtPassword----------------------------------------------------//
+// -----------------------------------------------ForgotPassword----------------------------------------------//
   static forgotPassword = async (req: Request, res: Response) => {
       const body: adminInterface = req.body;
 
@@ -157,4 +157,22 @@ export class AuthController {
       }
   };
   
+// ------------------------------------------------Disconnect------------------------------------------------//
+  static disconnect = async (req: Request, res: Response) => {
+    
+    // Récupération de l'admin grâce au Authmiddleware qui rajoute le token dans req
+    const request: any = req;
+    const admin: adminInterface = request.admin;
+    
+    admin.token = '';
+    admin.refreshToken = '';
+    await Admin.updateOne({_id : admin._id},admin);
+    res.status(200).send({
+      error: false,
+      message: "L'utilisateur a été déconnecté avec succès",
+    });
+    return;
+
+  }
+
 }
