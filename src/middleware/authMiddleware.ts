@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import jsonwebtoken from 'jsonwebtoken';
+import * as jwt from "jsonwebtoken"
 import { config } from "dotenv";
 import { adminInterface } from "../interfaces/adminInterface";
 import { Admin } from "../models/adminModel";
@@ -8,17 +8,18 @@ config();
 
 const JWT_KEY: string = process.env.JWT_KEY as string;
 
-const middleware: express.Application = express();
+const authMiddleware: express.Application = express();
 
-middleware.use(async (req: Request, res: Response, next: NextFunction) => {
+authMiddleware.use(async (req: Request, res: Response, next: NextFunction) => {
     try{
         
-        //Récupération du token
-        const token = req.header('Authorization')?.replace('Bearer','').trim() as string;
+        //Récupération des droits
+        const token: string| undefined= req.header('Authorization')?.replace('Bearer ','') as string;
+
         if(!token) throw new Error ('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
         
         //Vérification du token et des informations contenues
-        const data:any = jsonwebtoken.verify(token,JWT_KEY);
+        const data:any = jwt.verify(token,JWT_KEY);
         
         if(!data || !data.email || !data._id) throw new Error('Vous n\'avez pas les droit nécessaire pour accèder a cette ressource');
 
@@ -42,4 +43,4 @@ middleware.use(async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-export { middleware as authMiddleware };
+export {authMiddleware};
