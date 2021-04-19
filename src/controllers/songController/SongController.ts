@@ -10,7 +10,7 @@ export class SongController {
     static addSong = async (req: Request, res: Response) => {
         const body: songInterface = req.body;
 
-        if (!body.title || !body.genre || !body.album || !body.time || !body.artist) {
+        if (!body.title || !body.genre || !body.album || !body.url || !body.time || !body.artist) {
             res = SongException.getSongResponse("Des données sont manquantes", res);
             return;
         }
@@ -19,6 +19,7 @@ export class SongController {
             title: body.title,
             artist: body.artist,
             album: body.album,
+            url : body.url,
             genre: body.genre,
             time: body.time,
         })
@@ -27,7 +28,7 @@ export class SongController {
             error:false,
             message:"Le son a été ajouté avec succès",
             song:{
-                id:song.title,
+                title:song.title,
                 time: song.time,
             }
         })
