@@ -3,6 +3,7 @@ export default interface songInterfaces {
     title: string,
     artist: string,
     album: string,
+    url: string,
     genre: string,
     time: string,
 }
