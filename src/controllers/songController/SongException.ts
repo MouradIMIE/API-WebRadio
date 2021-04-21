@@ -11,6 +11,13 @@ export class SongException {
             });
             return res;
         }
+        if (error === "Ce son a déjà été ajouté") {
+            res.status(400).send({
+                error: true,
+                message: error
+            });
+            return res;
+        }
 
         // ********* DEFAULT *********//
         res.status(400).send({

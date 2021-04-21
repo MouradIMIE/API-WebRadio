@@ -15,6 +15,11 @@ export class SongController {
             return;
         }
 
+        if(await Song.findOne({ title: body.title })){
+            res = SongException.getSongResponse("Ce son a déjà été ajouté",res);
+            return;
+        }
+
         const song = await Song.create({
             title: body.title,
             artist: body.artist,
