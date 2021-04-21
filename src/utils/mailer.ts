@@ -1,31 +1,36 @@
-const nodemailer = require('nodemailer');
+import nodemailer from "nodemailer";
+import { config } from "dotenv";
+config();
 
-const sendEmail = (destination, subject, name, code) => {
+const accountMail = process.env.MAIL as string;
+const accountPassword = process.env.MAIL_PASSWORD as string;
+
+const sendMail = async (
+  email: string,
+  mailSubject: string,
+  password: string
+): Promise<void> => {
+  try {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: 'deno.api.eedsi@gmail.com',
-            pass: process.env.EMAIL_PASSWORD
-        }
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      requireTLS:true,
+      auth: {
+        user: accountMail,
+        pass: accountPassword,
+      },
     });
-    const mailOptions = {
-        from: 'MikeStation',
-        to: destination,
-        subject: subject,
-        text: name + " : Votre code de vérification MikeStation est : " + code + ". \nCe code est valide pendant 10 minutes.\n\nSi vous n'avez pas effectué de demande, ignorez ce message."
-    };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            throw({success: false, message: 'Internal server error : EMAIL'})
-        } else {
-            // console.log('Email sent: ' + info.response);
-            // console.log(mailOptions)
-        }
+    await transporter.sendMail({
+      from: "WebRadio RadioWorld - Team <" + accountMail + ">",
+      to: email,
+      subject: mailSubject,
+      text: "Your password is: " +  password
     });
-}
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-module.exports = sendEmail;
+export { sendMail };
